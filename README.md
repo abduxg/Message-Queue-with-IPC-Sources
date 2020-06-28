@@ -1,4 +1,4 @@
-# Message-Queue-with-IPC-Sources
+# Message-Queue-with-IPC-Sources(using process names like DNS)
 
 Usage:
 Server must be run first.
