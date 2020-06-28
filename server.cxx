@@ -24,11 +24,11 @@ int
 void process_msg(char *, int);
 //READ NAME AND PID NUMBER FROM FILE
 int read_dns();
-//YENİ BĞLANTI GELDİĞİ ZAMAN DOSYANIN SONUNA YAZDIĞINDAN, AYNI İSİMLİ BAĞLANTININ BİRİ YAŞAYAN BİRİ ÖLÜ PROCESS OLDUĞUNDAN HER ZAMAN EN YENİ OLANI ALMASI İİÇİN DOSYAYI OKUTUKTAN SONRA DİZİYE TERS ÇEVİREREK ALIYOR
+//WHEN THE NEW CONNECTION COMES TO THE END OF THE FILE, THIS IS THE SAME-NAME LINK, THAT IS A LIVING PROCESS, THERE IS ALWAYS REVERSE THE FILE TO TAKE THE LATEST.
 void reverse_domains(int);
-//İSİM VE PİD KAYDEDİLİRKEN ARALARINDA - TOKENİ KULLANILDI SATIR ÖNCE NAME-PİD OLARAK ALINIP NAME DİZİYE KAYDEDİLDİ SONRA SATIRI TERS ÇEVİRİP (PİD-İSİM) PİD ALIP DİZİYE KAYDEDİLDİ 
+//BETWEEN THE NAME AND PID REGISTER - TOKENI WAS USED BEFORE THE LINE IS RECEIVED AS NAME-PID, AND THE NAME IS RECORDED TO THE LIST, THEN THE LINE IS REVERSE (PID-NAME) PID IS RECORDED TO THE SEQUENCE.
 char *strev(char *);
-//GELEN MESAJDAKİ İSİM NAMESERVER DA ARANIYOR BULUNDUĞUNDA İNDEX NUMBER DÖNDÜRÜYOR
+//THE NAME IN THE MESSAGE FROM THE NAME SERVER IS ALSO SEARCHED AND TURNS INDEX NUMBER
 char search_name(char *,int);
 void signal_handler(int);
 
@@ -63,13 +63,13 @@ size = read_dns();
 
 reverse_domains(size);
 
-int index=search_name(msg.receiver_name,size);//mesajın kime gideceğinin pidini almak için pid_num için index num. alıyor
+int index=search_name(msg.receiver_name,size);
 
 
 process_msg(msg.buffer,strlen(msg.buffer));
 
 //MSG SEND
-msg.msg_to = pid_num[index];//mesaj gidecek pid
+msg.msg_to = pid_num[index];
 msg.msg_fm = SERVER;
 
 
