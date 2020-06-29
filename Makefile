@@ -1,6 +1,6 @@
 all:
-	g++ -o server server.cxx
-	g++ -o client client.cxx
+	g++ -o server src/server.cxx
+	g++ -o client src/client.cxx
 	mkdir out
 	mv server out
 	mv client out
